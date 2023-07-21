@@ -6,5 +6,10 @@ environment.config.node = {
   global: true
 }
 
+// Babelの設定を追加
+environment.loaders.get('babel').options = {
+  presets: ['@babel/preset-env']
+};
+
 module.exports = environment
 
