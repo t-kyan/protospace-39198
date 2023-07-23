@@ -1,12 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_prototype
+  before_action :authenticate_user!, only: [:create] 
 
   def create
     @comment = @prototype.comments.new(comment_params)
-    @comment.user = current_user
     if @comment.save
       redirect_to @prototype
     else
+      @comments = @prototype.comments
       render 'prototypes/show'
     end
   end
