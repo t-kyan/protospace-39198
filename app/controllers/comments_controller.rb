@@ -4,7 +4,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @prototype.comments.new(comment_params)
-    if @comment.save
+    if @comment.content.blank?
+      @comments = @prototype.comments
+      render 'prototypes/show'
+    elsif @comment.save
       redirect_to @prototype
     else
       @comments = @prototype.comments
